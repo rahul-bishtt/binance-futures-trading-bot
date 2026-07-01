@@ -56,11 +56,15 @@ class BinanceFuturesClient:
         self.testnet = testnet
 
         # Initialize the underlying python-binance client configured for testnet
-        self._client = Client(
-            api_key=self.api_key,
-            api_secret=self.api_secret,
-            testnet=self.testnet
-        )
+        try:
+            self._client = Client(
+                api_key=self.api_key,
+                api_secret=self.api_secret,
+                testnet=self.testnet
+            )
+        except Exception as e:
+            logger.error(f"Client initialization failed: {e}")
+            raise ClientError(f"Failed to initialize Binance Client: {e}") from e
         logger.info("Client initialized successfully.")
 
     def get_client(self) -> Client:

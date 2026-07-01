@@ -92,32 +92,44 @@ trading_bot/
 
 ## Running the Application
 
-To check if the CLI wrapper is set up correctly, run the help command:
-
+To check if the CLI is set up correctly, run the help command:
 ```bash
 python cli.py --help
 ```
 
-To view bot system info:
+To view bot system info and check if environment variables are loaded:
 ```bash
 python cli.py info
 ```
 
-To execute a test/mock order (placeholder):
+To place a **MARKET** order (e.g. BUY 0.001 BTC):
 ```bash
-python cli.py order --symbol BTCUSDT --side BUY --type LIMIT --qty 0.01 --price 90000
+python cli.py order --symbol BTCUSDT --side BUY --type MARKET --qty 0.001
+```
+
+To place a **LIMIT** order (e.g. SELL 0.001 BTC at $120,000):
+```bash
+python cli.py order --symbol BTCUSDT --side SELL --type LIMIT --qty 0.001 --price 120000
 ```
 
 ---
 
-## Future Implementation Roadmap
+## Project Assumptions & Design Decisions
 
-* **Loop 2:**
-  - Complete integration of python-binance client connected specifically to Binance Futures Testnet API.
-  - Implement full validation logic inside `validators.py` and catch custom exceptions.
-  - Finalize local logs setup using `logging_config.py` targeting the `logs/` directory.
-  - Hook CLI arguments to actual execution endpoints.
-* **Loop 3:**
-  - Add leverage adjustment and risk check features.
-  - Write comprehensive unit tests and automated mock tests.
-  - Establish error retry strategies.
+1. **Futures Testnet Only**: The bot is configured exclusively for the Binance Futures Testnet environment (`testnet.binance.vision`) to avoid accidental real money trades.
+2. **Offline-friendly Info**: The `info` command checks if keys are defined in the environment variables without initiating a network handshake, preventing network delay.
+3. **Strict Validation Layer**: Input parameter normalization (uppercasing, trimming whitespace) is executed locally before any network connection is established, saving API call bandwidth.
+4. **Type-Aware Price Resolution**:
+   - For `MARKET` orders, the price is resolved using `avgPrice` from the fill details.
+   - For `LIMIT` orders, the price is resolved using the specified limit price.
+5. **Console Encoding Security**: ASCII symbols `[OK]` and `[FAIL]` are used in print borders and labels to prevent `UnicodeEncodeError` on Windows consoles.
+6. **Pinned Dependencies**: Dependency limits are strict (specifically Click 8.1.7) to prevent compatibility breaks with Typer.
+
+---
+
+## Future Scope
+
+* **Leverage & Margin Controls**: Implement endpoints to configure leverage (`futures_change_leverage`) and switch between cross/isolated margin.
+* **Pre-trade Risk Management**: Incorporate client-side max daily loss limits and position size boundaries.
+* **Resilience & Retry Logic**: Add automatic order retries with exponential backoff for transient HTTP 5xx or connection issues.
+
