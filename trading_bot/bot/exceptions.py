@@ -24,6 +24,36 @@ class ValidationError(TradingBotError):
     pass
 
 
+class InvalidSymbolError(ValidationError):
+    """Raised when a symbol fails format or existence validation."""
+
+    pass
+
+
+class InvalidSideError(ValidationError):
+    """Raised when an order side is invalid."""
+
+    pass
+
+
+class InvalidOrderTypeError(ValidationError):
+    """Raised when an order type is invalid."""
+
+    pass
+
+
+class InvalidQuantityError(ValidationError):
+    """Raised when an order quantity is invalid."""
+
+    pass
+
+
+class InvalidPriceError(ValidationError):
+    """Raised when an order price is invalid."""
+
+    pass
+
+
 class OrderError(TradingBotError):
     """Raised when an order placement or order-related action fails."""
 
