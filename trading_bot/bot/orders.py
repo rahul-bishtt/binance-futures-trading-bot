@@ -56,9 +56,10 @@ class OrderResult:
 def _build_order_result(response: dict) -> OrderResult:
     """Convert a raw Binance Futures API order response into an OrderResult.
 
-    For MARKET orders the price is sourced from avgPrice and set to None when
-    the order has not yet filled (avgPrice == "0" or absent). For LIMIT orders
-    the stated limit price is used as a fallback when avgPrice is zero.
+    Price resolution is type-aware:
+    - MARKET orders: price is taken from avgPrice. Set to None if avgPrice
+      is "0" or absent (order not yet filled).
+    - LIMIT orders: price is always taken from the stated limit price field.
 
     Args:
         response: The raw dict returned by the Binance Futures API.
@@ -66,17 +67,18 @@ def _build_order_result(response: dict) -> OrderResult:
     Returns:
         OrderResult: The normalized order result.
     """
-    avg_price_raw = response.get("avgPrice", "0")
+    order_type = response.get("type", "")
 
-    # Parse avgPrice; treat "0" and missing values as None (unfilled)
-    try:
-        avg_price = float(avg_price_raw)
-        price: float | None = avg_price if avg_price > 0 else None
-    except (ValueError, TypeError):
-        price = None
-
-    # For LIMIT orders, fall back to the stated price when not yet filled
-    if response.get("type") == "LIMIT" and price is None:
+    if order_type == "MARKET":
+        # Use avgPrice for MARKET orders; None if the order has not yet filled
+        avg_price_raw = response.get("avgPrice", "0")
+        try:
+            avg_price = float(avg_price_raw)
+            price: float | None = avg_price if avg_price > 0 else None
+        except (ValueError, TypeError):
+            price = None
+    else:
+        # LIMIT orders always carry the stated limit price in the price field
         try:
             limit_price = float(response.get("price", 0))
             price = limit_price if limit_price > 0 else None
