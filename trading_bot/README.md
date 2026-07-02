@@ -153,3 +153,25 @@ python cli.py order --symbol BTCUSDT --side SELL --type LIMIT --qty 0.001 --pric
 * **Pre-trade Risk Management**: Incorporate client-side max daily loss limits and position size boundaries.
 * **Resilience & Retry Logic**: Add automatic order retries with exponential backoff for transient HTTP 5xx or connection issues.
 
+---
+
+## 📸 Screenshots
+
+### CLI Help
+
+![CLI Help](screenshots/cli-help.png)
+
+---
+
+### Successful MARKET Order
+
+![Market Order](screenshots/market-order.png)
+
+---
+
+### Successful LIMIT Order
+
+![Limit Order](screenshots/limit-order.png)
+
+  
+
