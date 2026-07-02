@@ -1,6 +1,26 @@
-# Binance Futures Testnet Trading Bot
+# Binance Futures Trading Bot
 
-A production-quality Python trading bot for the Binance Futures Testnet environment. The application is built using standard, clean architecture patterns ensuring single-responsibility and separation of concerns.
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Binance Futures](https://img.shields.io/badge/Binance-Futures_Testnet-F3BA2F?logo=binance&logoColor=white)
+![CLI](https://img.shields.io/badge/CLI-Typer-blueviolet)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+A production-quality Python trading bot for the Binance Futures Testnet environment. Built with clean architecture, modular design, comprehensive validation, structured logging, and robust error handling.
+
+---
+
+## ✨ Highlights
+
+- 🚀 Binance Futures Testnet Integration
+- 📈 Market & Limit Order Support
+- 🖥️ Interactive CLI using Typer
+- ✅ Input Validation
+- 📝 Structured Logging
+- ⚠️ Robust Error Handling
+- 🧩 Modular Clean Architecture
+
+---
 
 ## Architecture & Application Flow
 
@@ -132,4 +152,26 @@ python cli.py order --symbol BTCUSDT --side SELL --type LIMIT --qty 0.001 --pric
 * **Leverage & Margin Controls**: Implement endpoints to configure leverage (`futures_change_leverage`) and switch between cross/isolated margin.
 * **Pre-trade Risk Management**: Incorporate client-side max daily loss limits and position size boundaries.
 * **Resilience & Retry Logic**: Add automatic order retries with exponential backoff for transient HTTP 5xx or connection issues.
+
+---
+
+## 📸 Screenshots
+
+### CLI Help
+
+![CLI Help](screenshots/cli-help.png)
+
+---
+
+### Successful MARKET Order
+
+![Market Order](screenshots/market-order.png)
+
+---
+
+### Successful LIMIT Order
+
+![Limit Order](screenshots/limit-order.png)
+
+  
 
