@@ -1,6 +1,10 @@
-# Binance Futures Testnet Trading Bot
+# Binance Futures Trading Bot
 
-A production-quality Python trading bot for the Binance Futures Testnet environment. The application is built using standard, clean architecture patterns ensuring single-responsibility and separation of concerns.
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Binance](https://img.shields.io/badge/Binance-Futures-yellow)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+A production-quality Python trading bot for the Binance Futures Testnet environment. The application is built using clean architecture with separate layers for validation, API interaction, order management, and CLI execution.
 
 ## Architecture & Application Flow
 
