@@ -7,6 +7,21 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 A production-quality Python trading bot for the Binance Futures Testnet environment. Built with clean architecture, modular design, comprehensive validation, structured logging, and robust error handling.
+
+---
+
+## ✨ Highlights
+
+- 🚀 Binance Futures Testnet Integration
+- 📈 Market & Limit Order Support
+- 🖥️ Interactive CLI using Typer
+- ✅ Input Validation
+- 📝 Structured Logging
+- ⚠️ Robust Error Handling
+- 🧩 Modular Clean Architecture
+
+---
+
 ## Architecture & Application Flow
 
 The bot processes operations according to the following top-down flow:
