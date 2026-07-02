@@ -155,6 +155,20 @@ python cli.py order --symbol BTCUSDT --side SELL --type LIMIT --qty 0.001 --pric
 
 ---
 
+## 🚀 Features
+
+- ✅ Binance Futures Testnet Integration
+- ✅ BUY & SELL Market Orders
+- ✅ BUY & SELL Limit Orders
+- ✅ Interactive CLI (Typer)
+- ✅ Input Validation
+- ✅ Structured Logging
+- ✅ Custom Exception Handling
+- ✅ Environment Variable Support
+- ✅ Modular Clean Architecture
+
+---
+
 ## 📸 Screenshots
 
 ### CLI Help
